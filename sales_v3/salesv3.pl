@@ -23,7 +23,7 @@ use Tk;
 #It will calculate the additional amount of sales that each salesperson must achieve to match or
 #exceed the higher of the two earners.
 #******This amended Java program was originally written by Scott DuBois
-#******Converted to Perl on 4/8/2014 by Scott DuBois
+#******Converted to Perl on 4/8/2014 by Scott DuBois written using Vim.
 
 my $fixed       = 75000;
 my $target      = 120000;
