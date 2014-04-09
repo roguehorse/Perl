@@ -1,0 +1,17 @@
+ 
+Modify the Week Two Java™ application using Java™ NetBeans™ IDE to meet these additional and changed business requirements:
+
+The company has recently changed its total annual compensation policy to improve sales.
+
+A salesperson will continue to earn a fixed salary of  75,000. The current sales target for every salesperson is 120,000.
+
+The sales incentive will only start when 80% of the sales target is met. The current commission is 7% of total sales.
+
+If a salesperson exceeds the sales target, the commission will increase based on an acceleration factor. The acceleration factor is 1.5.
+
+The application should ask the user to enter annual sales, and it should display the total annual compensation.
+
+The application should also display a table of potential total annual compensation that the salesperson could have earned, in $5000 increments above the salesperson’s annual sales, until it reaches 50% above the salesperson’s annual sales. 
+
+
+
