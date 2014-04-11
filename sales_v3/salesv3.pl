@@ -3,6 +3,7 @@
 use warnings;
 use strict;
 use Tk;
+use Term::ANSIColor;
 
 #*****************************Orginial Algorithm***************************
 #A company has recently changed it's compensation policy to improves sales.
@@ -23,7 +24,8 @@ use Tk;
 #It will calculate the additional amount of sales that each salesperson must achieve to match or
 #exceed the higher of the two earners.
 #******This amended Java program was originally written by Scott DuBois
-#******Converted to Perl on 4/8/2014 by Scott DuBois
+#******Converted to Perl on 4/8/2014 by Scott DuBois in Vim.
+
 
 my $fixed       = 75000;
 my $target      = 120000;
@@ -37,200 +39,361 @@ my ( $sales, $names,  $x,      $z,      $spX );
 my ( $gross, $gross1, $gross2, $gross3, $gross4 );
 my ( $table1, $table2 );
 
+#*************Clear screen and describe program**************
+
 system('clear');
 print "\n\n";
-printf "%60s", 'This program calculates if either salesperson';
+printf "%61s", 'This program calculates if either salesperson';
 print "\n";
-printf "%60s", 'has produced enough in sales to earn a sales bonus';
+printf "%64s", 'has produced enough in sales to earn a sales bonus.';
 print "\n\n";
-sleep 1;
-print "Then the program will determine how much more in sales\n";
-print "the lesser of the two must produce to match the greater producer.\n\n";
-sleep 1;
-print "The program will then provide a listing of what\n";
-print "each salesperson could have earned in \$5000 increments.\n\n";
-sleep 1;
+sleep 2;
+printf "%66s", 'Then the program will determine how much more in sales';
+print "\n";
+printf "%71s", 'the lesser of the two must produce to match the greater producer.';
+print "\n\n";
+sleep 2;
+printf "%62s", 'The program will then provide a listing of what';
+print "\n";
+printf "%50s", 'each salesperson could have earned in ';
+print color 'bright_green';
+print "\$5000";
+print color 'reset';
+print " increments.";
+print "\n\n\n";
+sleep 2;
+
+#**************************************************************
+
+#**************Get names of the sales people*******************
 
 #Get salesperson names
 for ( $x = 1 ; $x < 3 ; $x++ )
 {
-    print "Please enter salesperson $x first name: ";
+    print "\n";
+    printf "%40s", 'Please enter salesperson';
+    print color 'bright_yellow';
+    print " $x ";
+    print color 'reset';
+    print "first name: ";
+    print color 'bright_yellow';
     $names = <>;
     chomp($names);
     push @names, $names;
+    print color 'reset';
 }
 
+#*************************************************************
+
+#***************Get sales input from each person**************
+
 #Get amount in sales from each person
-sleep 2;
+sleep 1;
 for ( $z = 1 ; $z < 3 ; $z++ )
 {
     if ( $z == 1 )
     {
-        print "\nPlease enter the amount produced in sales for ";
-        printf "$names[0] \$";
+	print "\n";
+        printf "%54s", 'Please enter the amount produced in sales for ';
+	print color 'bright_yellow';
+        printf "$names[0]";
+	print color 'bright_green';
+	print " \$";
     }
     else
     {
-        print "Please enter the amount produced in sales for ";
-        printf "$names[1] \$";
+	print "\n";
+        printf "%54s", 'Please enter the amount produced in sales for ';
+	print color 'bright_yellow';
+        printf "$names[1]";
+	print color 'bright_green';
+	print " \$";
     }
-
+  
     $sales = <>;
     chomp($sales);
     push @sales, $sales;
+    print color 'reset';    
+
     if ( $sales <= 0 )
     {
-        print "\nValue must be greater than zero\n";
+	print "\n";
+	print color 'red';
+        printf "%60s", 'Value must be greater than zero!';
+	print color 'reset';
+	print "\n";
         pop @sales;
         $z = $z - 1;
     }
 }
 
+sleep 1;
+print "\n\n\n\n\n";
+printf "%35s", '"';
+print color 'bright_yellow';
+print "Thank you";
+print color 'reset';
+print "\"";
+print "\n\n";
+printf "%63s", 'Please wait while we calculate the values entered';
+sleep 4;
 system('clear');
-sleep 2;
 
-#determine if salesperson 1 has earned a bonus
-for ( $x = 1 ; $x < 2 ; $x++ )
-{
-    if ( $sales[0] >= $target )
-    {
-        print "Bonuses will be awarded to >> ";
-        print "$names[0]\n";
-        print "Gross income earned will be >> ";
-        $gross2 = $sales[0] * $commission * $accelerator + $fixed;
-        printf "\$%.2f", $gross2;
-    }
-    elsif ( $sales[0] >= $incentive * $target && $sales[0] < $target )
-    {
-        print "A bonus will be awarded to >> ";
-        print "$names[0]\n";
-        print "Gross income earned will be >> ";
-        $gross1 = $sales[0] * $commission + $fixed;
-        printf "\$%.2f", $gross1;
-    }
-    else
-    {
-        print "No bonus will be awarded to >> ";
-        print "$names[0]\n";
-        print "Gross income earned will be >> ";
-        printf "\$%.2f", $fixed;
-    }
-}
+#*************************************************************
 
-#detrmine is salesperson 2 has earned a bonus
-for ( $z = 1 ; $z < 2 ; $z++ )
-{
-    if ( $sales[1] >= $target )
-    {
-        print "\n\nBonuses will be awarded to >> ";
-        print "$names[1]\n";
-        print "Gross income earned will be >> ";
-        $gross4 = $sales[1] * $commission * $incentive + $fixed;
-        printf "\$%.2f", $gross4;
-    }
-    elsif ( $sales[1] >= $incentive * $target && $sales[1] < $target )
-    {
-        print "\n\nA bonus will be awarded to >> ";
-        print "$names[1]\n";
-        print "Gross income earned will be >> ";
-        $gross3 = $sales[1] * $commission + $fixed;
-        printf "\$%.2f", $gross3;
-    }
-    else
-    {
-        print "\n\nNo bonus will be awarded to >> ";
-        print "$names[1]\n";
-        print "Gross income earned will be >> ";
-        printf "\$%.2f", $fixed;
-    }
-}
+#**************Determine Who Earned More**********************
 
 #Determine difference in sales between salesperson
 my $salesdiff1 = ( $sales[0] - $sales[1] );
 my $salesdiff2 = ( $sales[1] - $sales[0] );
 if ( $sales[0] > $sales[1] )
 {
-    printf "\n\n$names[1] must earn \$%.2f", $salesdiff1;
-    print  " more to match $names[0]\n";
+    print "\n\n";
+    print color 'bright_yellow';
+    printf "%22s", $names[1];
+    print color 'reset';
+    print " must earn ";
+    print color 'bright_green';
+    printf "\$%.2f", $salesdiff1;
+    print color 'reset';
+    print  " more to match ";
+    print color 'bright_yellow';
+    print "$names[0]\n";
+    print color 'reset';
 }
 elsif ( $sales[1] > $sales[0] )
 {
-    printf "\n\n$names[0] must earn \$%.2f", $salesdiff2;
-    print " more to match $names[1]\n";
+    print "\n\n";
+    print color 'bright_yellow';
+    printf "%22s", $names[0];
+    print color 'reset';
+    print " must earn ";
+    print color 'bright_green';
+    printf "\$%.2f", $salesdiff2;
+    print color 'reset';
+    print  " more to match ";
+    print color 'bright_yellow';
+    print "$names[1]\n";
+    print color 'reset';
 }
 else
 {
-    print "\n\n$names[0] has earned the same amount as $names[1]\n";
+    print "\n\n";
+    print color 'bright_yellow';
+    printf "%22s", $names[0];
+    print color 'reset';
+    print " has earned the same amount as ";
+    print color 'bright_yellow';
+    print "$names[1]\n";
+    print color 'reset';
 }
 
+#**************************************************************
+
+#**********Determine if first salesperson gets a bonus*********
+
+#determine if salesperson 1 has earned a bonus
+for ( $x = 1 ; $x < 2 ; $x++ )
+{
+    if ( $sales[0] >= $target )
+    {
+	print "\n\n\n";
+        printf "%50s", 'Bonuses will be awarded to >> ';
+	print color 'bright_yellow';
+        print "$names[0]\n";
+	print color 'reset';
+        printf "%50s", 'Gross income earned will be >> ';
+        $gross2 = $sales[0] * $commission * $accelerator + $fixed;
+        print color 'bright_green';
+        printf "\$%.2f", $gross2;
+	print color 'reset';
+    }
+    elsif ( $sales[0] >= $incentive * $target && $sales[0] < $target )
+    {
+	print "\n\n";
+        printf "%50s", 'A bonus will be awarded to >> ';
+	print color 'bright_yellow';
+        print "$names[0]\n";
+	print color 'reset';
+        printf "%50s", 'Gross income earned will be >> ';
+        $gross1 = $sales[0] * $commission + $fixed;
+	print color 'bright_green';
+        printf "\$%.2f", $gross1;
+	print color 'reset';
+    }
+    else
+    {
+	print "\n\n";
+        printf "%50s", 'No bonus will be awarded to >> ';
+	print color 'bright_yellow';
+        print "$names[0]\n";
+	print color 'reset';
+        printf "%50s", 'Gross income earned will be >> ';
+	print color 'bright_green';
+        printf "\$%.2f", $fixed;
+	print color 'reset';
+    }
+}
+
+#****************************************************************
+
+#**********Determine if second salesperson gets a bonus**********
+
+#detrmine is salesperson 2 has earned a bonus
+for ( $z = 1 ; $z < 2 ; $z++ )
+{
+    if ( $sales[1] >= $target )
+    {
+	print "\n\n";
+        printf "%50s", 'Bonuses will be awarded to >> ';
+	print color 'bright_yellow';
+        print "$names[1]\n";
+	print color 'reset';
+        printf "%50s", 'Gross income earned will be >> ';
+        $gross4 = $sales[1] * $commission * $accelerator + $fixed;
+	print color 'bright_green';
+        printf "\$%.2f", $gross4;
+	print color 'reset';
+    }
+    elsif ( $sales[1] >= $incentive * $target && $sales[1] < $target )
+    {
+	print "\n\n";
+        printf "%50s", 'A bonus will be awarded to >> ';
+	print color 'bright_yellow';
+        print "$names[1]\n";
+	print color 'reset';
+        printf "%50s", 'Gross income earned will be >> ';
+        $gross3 = $sales[1] * $commission + $fixed;
+	print color 'bright_green';
+        printf "\$%.2f", $gross3;
+	print color 'reset';
+    }
+    else
+    {
+	print "\n\n";
+        printf "%50s", 'No bonus will be awarded to >> ';
+	print color 'bright_yellow';
+        print "$names[1]\n";
+	print color 'reset';
+        printf "%50s", 'Gross income earned will be >> ';
+	print color 'bright_green';
+        printf "\$%.2f", $fixed;
+	print color 'reset';
+    }
+}
+
+#*****************************************************************
+
+#********Create possible salary values for first salesperson*******
+
 #Create table for first salesperson
-print "\n\nPossible compensation for >> ";
+print "\n\n";
+printf "%50s", 'Possible compensation for >> ';
+print color 'bright_yellow';
 print "$names[0]\n";
-print "  Sales Amount  -->  Earnings\n";
-print "  ---------------------------\n";
-sleep 2;
+print color 'reset';
+printf "%52s", 'Sales Amount  -->  Earnings';
+print "\n";
+print color 'bright_blue';
+printf "%52s", '---------------------------';
+print color 'reset';
+print "\n";
+sleep 1;
 
 #Create table values based on sales value from first salesperson
 $table1 = $sales[0];
 while ( $table1 < $sales[0] * $accelerator )
 {
-    printf "  \$%.2f", $table1;
+    sleep 1;
+    print color 'bright_green';
+    printf "%26s", '$';
+    printf "%.2f", $table1;
+    print color 'reset';
     if ( $table1 >= $target )
     {
         $gross2 = ( $table1 * ( $commission * $accelerator ) + $fixed );
-        sleep 1;
-        printf "   -->   \$%.2f\n", $gross2;
+        print "   -->   ";
+	print color 'bright_green';
+	printf "\$%.2f\n", $gross2;
+	print color 'reset';
         $table1 = $table1 + 5000;
     }
     elsif ( $table1 >= $incentive * $target && $table1 < $target )
     {
         $gross1 = ( $table1 * $commission + $fixed );
-        sleep 1;
-        printf "   -->   \$%.2f\n", $gross1;
+        print "   -->   ";
+	print color 'bright_green';
+	printf "\$%.2f\n", $gross1;
+	print color 'reset';
         $table1 = $table1 + 5000;
     }
     else
     {
         $gross = $fixed;
-        sleep 1;
-        printf "   -->   \$%.2f\n", $gross;
+        print "   -->   ";
+	print color 'bright_green';
+	printf "\$%.2f\n", $gross;
+	print color 'reset';
         $table1 = $table1 + 5000;
     }
 }
 
+#*****************************************************************
+
+#*******Create possible salary values for second salesperson*******
+
 #Create table for second salesperson
-print "\n\nPossible compensation for >> ";
+print "\n\n";
+printf "%50s", 'Possible compensation for >> ';
+print color 'bright_yellow';
 print "$names[1]\n";
-print "  Sales Amount  -->  Earnings\n";
-print "  ---------------------------\n";
+print color 'reset';
+printf "%52s", 'Sales Amount  -->  Earnings';
+print "\n";
+print color 'bright_blue';
+printf "%52s", '---------------------------';
+print color 'reset';
+print "\n";
 sleep 2;
 
 #Create table values based on sales value from second salesperson
 $table2 = $sales[1];
 while ( $table2 < $sales[1] * $accelerator )
 {
-    printf "  \$%.2f", $table2;
+    sleep 1;
+    print color 'bright_green';
+    printf "%26s", '$';
+    printf "%.2f", $table2;
+    print color 'reset';
     if ( $table2 >= $target )
     {
         $gross4 = ( $table2 * ( $commission * $accelerator ) + $fixed );
-        sleep 1;
-        printf "   -->   \$%.2f\n", $gross4;
+        print "   -->   ";
+	print color 'bright_green';
+	printf "\$%.2f\n", $gross4;
+	print color 'reset';
         $table2 = $table2 + 5000;
     }
     elsif ( $table2 >= $incentive * $target && $table2 < $target )
     {
         $gross3 = ( $table2 * $commission + $fixed );
-        sleep 1;
-        printf "   -->   \$%.2f\n", $gross3;
+        print "   -->   ";
+	print color 'bright_green';
+	printf "\$%.2f\n", $gross3;
+	print color 'reset';
         $table2 = $table2 + 5000;
     }
     else
     {
         $gross = $fixed;
-        sleep 1;
-        printf "   -->   \$%.2f\n", $gross;
+        print "   -->   ";
+	print color 'bright_green';
+	printf "\$%.2f\n", $gross;
+	print color 'reset';
         $table2 = $table2 + 5000;
     }
 }
+
+#******************************************************************
 print "\n\n";
 
