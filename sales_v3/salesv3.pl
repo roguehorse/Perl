@@ -2,7 +2,6 @@
 #Don't forget to run perltidy!
 use warnings;
 use strict;
-use Tk;
 use Term::ANSIColor;
 
 #*****************************Orginial Algorithm***************************
