@@ -54,7 +54,7 @@ print "\n\n";
 sleep 2;
 printf "%62s", 'The program will then provide a listing of what';
 print "\n";
-printf "%50s", 'each salesperson could have earned in ';
+printf "%49s", 'each salesperson could have earned in ';
 print color 'bright_green';
 print "\$5000";
 print color 'reset';
@@ -93,7 +93,7 @@ for ( $z = 1 ; $z < 3 ; $z++ )
     if ( $z == 1 )
     {
 	print "\n";
-        printf "%54s", 'Please enter the amount produced in sales for ';
+        printf "%55s", 'Please enter the amount produced in sales for ';
 	print color 'bright_yellow';
         printf "$names[0]";
 	print color 'bright_green';
@@ -102,7 +102,7 @@ for ( $z = 1 ; $z < 3 ; $z++ )
     else
     {
 	print "\n";
-        printf "%54s", 'Please enter the amount produced in sales for ';
+        printf "%55s", 'Please enter the amount produced in sales for ';
 	print color 'bright_yellow';
         printf "$names[1]";
 	print color 'bright_green';
@@ -127,16 +127,13 @@ for ( $z = 1 ; $z < 3 ; $z++ )
 }
 
 sleep 1;
-print "\n\n\n\n\n";
+print "\n\n\n\n";
 printf "%35s", '"';
 print color 'bright_yellow';
 print "Thank you";
 print color 'reset';
-print "\"";
-print "\n\n";
-printf "%63s", 'Please wait while we calculate the values entered';
-sleep 4;
-system('clear');
+printf "\"\n\n";
+sleep 3;
 
 #*************************************************************
 
@@ -145,6 +142,8 @@ system('clear');
 #Determine difference in sales between salesperson
 my $salesdiff1 = ( $sales[0] - $sales[1] );
 my $salesdiff2 = ( $sales[1] - $sales[0] );
+
+system('clear');
 if ( $sales[0] > $sales[1] )
 {
     print "\n\n";
@@ -320,16 +319,27 @@ while ( $table1 < $sales[0] * $accelerator )
     elsif ( $table1 >= $incentive * $target && $table1 < $target )
     {
         $gross1 = ( $table1 * $commission + $fixed );
-        print "   -->   ";
-	print color 'bright_green';
-	printf "\$%.2f\n", $gross1;
-	print color 'reset';
-        $table1 = $table1 + 5000;
+	if ( $table1 <= 99999 )
+	{
+	    print "    -->   ";
+	    print color 'bright_green';
+	    printf "\$%.2f\n", $gross1;
+	    print color 'reset';
+            $table1 = $table1 + 5000;
+	}    	
+	else
+ 	{
+            print "   -->   ";
+	    print color 'bright_green';
+	    printf "\$%.2f\n", $gross1;
+	    print color 'reset';
+            $table1 = $table1 + 5000;
+	}
     }
     else
     {
         $gross = $fixed;
-        print "   -->   ";
+        print "    -->   ";
 	print color 'bright_green';
 	printf "\$%.2f\n", $gross;
 	print color 'reset';
@@ -353,7 +363,7 @@ print color 'bright_blue';
 printf "%52s", '---------------------------';
 print color 'reset';
 print "\n";
-sleep 2;
+sleep 1;
 
 #Create table values based on sales value from second salesperson
 $table2 = $sales[1];
@@ -376,16 +386,27 @@ while ( $table2 < $sales[1] * $accelerator )
     elsif ( $table2 >= $incentive * $target && $table2 < $target )
     {
         $gross3 = ( $table2 * $commission + $fixed );
-        print "   -->   ";
-	print color 'bright_green';
-	printf "\$%.2f\n", $gross3;
-	print color 'reset';
-        $table2 = $table2 + 5000;
+	if ( $table2 <= 99999 )
+	{
+ 	    print "    -->   ";
+	    print color 'bright_green';
+	    printf "\$%.2f\n", $gross3;
+	    print color 'reset';
+            $table2 = $table2 + 5000;
+	}    
+	else
+	{
+            print "   -->   ";
+	    print color 'bright_green';
+	    printf "\$%.2f\n", $gross3;
+	    print color 'reset';
+            $table2 = $table2 + 5000;
+	}
     }
     else
     {
         $gross = $fixed;
-        print "   -->   ";
+        print "    -->   ";
 	print color 'bright_green';
 	printf "\$%.2f\n", $gross;
 	print color 'reset';
