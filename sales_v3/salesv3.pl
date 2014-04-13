@@ -1,30 +1,36 @@
 #!/usr/bin/perl
 #Don't forget to run perltidy!
+
 use warnings;
 use strict;
 use Term::ANSIColor;
 
-#*****************************Orginial Algorithm***************************
-#A company has recently changed it's compensation policy to improves sales.
-#A salesperson will earn a fixed salary of $75,000 with a sales target of $120,000.
-#A sales incentive will start when 80% of their sales goal has been met
-#with a commission rate of 7%.
-#If a salesperson exceeds the target, the commission will increase based on an acceleration factor of 1.5%
-#The application should ask the user to enter annual sales and should display total compensation
-#The application should also display a table of potential total annual compensation the sales person
-#could have earned in $5000 increments above the salespersons annual sales,
-#until it reaches 50% above the salesperson's annual sales.
-
-#***** This program was originally written by Scott DuBois in Java
-#***** and converted on 3/29/14 by Scott DuBois
-#
-#******This program builds on the original as outlined below**********
-#The application will now compare the total copaensation of at least two sales people
-#It will calculate the additional amount of sales that each salesperson must achieve to match or
-#exceed the higher of the two earners.
-#******This amended Java program was originally written by Scott DuBois
-#******Converted to Perl on 4/8/2014 by Scott DuBois in Vim.
-
+#*****************************Orginial Algorithm*******************************#
+#A company has recently changed it's compensation policy to improves sales.    #
+#A salesperson will earn a fixed salary of $75,000 with a sales target of      #
+#$120,000. A sales incentive will start when 80% of their sales goal has       #
+#been met with a commission rate of 7%.					       #
+#If a salesperson exceeds the target, the commission will increase based on an #
+#acceleration factor of 1.5%.						       #
+#The application should ask the user to enter annual sales and should display  #
+#total compensation.	      						       #
+#The application should also display a table of potential total annual         #
+#compensation the sales person could have earned in $5000 increments above     #
+#the salespersons annual sales,				                       #
+#until it reaches 50% above the salesperson's annual sales.                    #
+#                     			                                       #
+#***** This program was originally written by Scott DuBois in Java             #
+#***** and converted on 3/29/14 by Scott DuBois                                #
+#                                                                              #
+#******This program builds on the original as outlined below**********         #
+#The application will now compare the total copaensation of at least two       #
+#sales people.                         					       #
+#It will calculate the additional amount of sales that each salesperson        #
+#must achieve to match or exceed the higher of the two earners.		       #
+#				                                               #
+#******This amended Java program was originally written by Scott DuBois        #	
+#******Converted to Perl on 4/8/2014 by Scott DuBois in Vim.                   #
+#******************************************************************************#
 
 my $fixed       = 75000;
 my $target      = 120000;
