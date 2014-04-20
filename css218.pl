@@ -21,7 +21,7 @@ my $class = 'CSS218';
 system ('clear');
 
 print "What is your name? ";
-print color 'bright_blue';
+print color 'bright_yellow';
 $name = <>;
 chomp ($name);
 print color 'reset';
@@ -29,10 +29,11 @@ sleep 2;
 print "\n\n\nWelcome to ";
 print color 'bright_magenta';
 print "$class ";
-print color 'bright_blue';
+print color 'bright_yellow';
 print "$name";
 print color 'reset';
-print " ! ";
+print " ! \n\n";
+print "Congratulations your homework is done";
 
 print "\n\n\n\n";
 
