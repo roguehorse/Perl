@@ -32,8 +32,7 @@ print "$class ";
 print color 'bright_yellow';
 print "$name";
 print color 'reset';
-print " ! \n\n";
-print "Congratulations your homework is done";
+print " ! ";
 
 print "\n\n\n\n";
 

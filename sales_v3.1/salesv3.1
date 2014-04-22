@@ -94,31 +94,21 @@ for ( $x = 1 ; $x < 3 ; $x++ )
 
 #Get amount in sales from each person
 sleep 1;
-for ( $z = 1 ; $z < 3 ; $z++ )
+$z = 0;
+while ( $z < 2 )
 {
-    if ( $z == 1 )
-    {
 	print "\n";
         printf "%55s", 'Please enter the amount produced in sales for ';
 	print color 'bright_yellow';
-        printf "$names[0]";
+        printf "$names[$z]";
 	print color 'bright_green';
 	print " \$";
-    }
-    else
-    {
-	print "\n";
-        printf "%55s", 'Please enter the amount produced in sales for ';
-	print color 'bright_yellow';
-        printf "$names[1]";
-	print color 'bright_green';
-	print " \$";
-    }
-  
+     
     $sales = <>;
     chomp($sales);
     push @sales, $sales;
     print color 'reset';    
+    $z++;
 
     if ( $sales <= 0 )
     {
@@ -128,7 +118,7 @@ for ( $z = 1 ; $z < 3 ; $z++ )
 	print color 'reset';
 	print "\n";
         pop @sales;
-        $z = $z - 1;
+        $z--;
     }
 }
 
