@@ -4,23 +4,30 @@ use warnings;
 use strict;
 use Tk;
 
-#A company has recently changed it's compensation policy to improves sales.
-#A salesperson will earn a fixed salary of $75,000 with a sales target of $120,000.
-#A sales incentive will start when 80% of their sales incentive has been met
-#with a commission rate of 7%.
-#If a salesperson exceeds the target, the commission will increase based on an acceleration factor of 1.5%
-#The application should ask the user to enter annual sales and should display total compensation
-#The application should also display a table of potential total annual compensation the sales person
-#could have earned in $5000 increments above the salespersons annual sales,
-#until it reaches 50% above the salesperson's annual sales.
+#**********************************************************
+# A company has recently changed it's compensation policy * 
+# to improves sales. A salesperson will earn a fixed      *
+# salary of $75,000 with a sales target of $120,000.      *
+# A sales incentive will start when 80% of their sales    *
+# incentive has been met with a commission rate of 7%.    *
+# If a salesperson exceeds the target, the commission will*
+# increase based on an acceleration factor of 1.5%.       * 
+# The application should ask the user to enter annual     *
+# sales and should display total compensation.            *
+# The application should also display a table of potential* 
+# total annual compensation the sales person could have   *
+# earned in $5000 increments above the salespersons annual* 
+# sales until it reaches 50% above the salesperson's      *
+# annual sales.						  *
+#**********************************************************
+# This program was originally written by Scott DuBois in  * 
+# Java and converted on 3/29/14 by Scott DuBois           *
+#**********************************************************
 
-#***** This program was originally written by Scott DuBois in Java
-#***** and converted on 3/29/14 by Scott DuBois
-
-my $fixed            = 75000;
-my $target          = 120000;
-my $incentive     = .80;
-my $commission = .07;
+my $fixed        = 75000;
+my $target       = 120000;
+my $incentive    = .80;
+my $commission   = .07;
 my $accelerator  = 1.5;
 
 my $gross;
