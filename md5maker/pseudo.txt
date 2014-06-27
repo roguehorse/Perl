@@ -1,0 +1,8 @@
+#pseudo code for md5maker
+#built on PerlTK
+#purpose: to provide non-command line users a simple interface for generating md5 and sha256 sums
+
+#user select file with navigation
+#select md5 or sha256
+#output shows in display box
+
