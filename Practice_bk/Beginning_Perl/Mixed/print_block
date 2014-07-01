@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+use warnings;
+
+#Print a block
+print "Top level\n";
+{
+	print "Second level\n";
+	{
+		print "Third level\n";
+	}
+	print "Where are we?\n";
+}
