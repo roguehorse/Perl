@@ -1,3 +1,5 @@
+perldoc <name> = manuals via terminal
+
 $_ = If we don't supply an iterator variable of our own, perl uses the special $_ variable, which is often used in Perl functions as  a 'default value'. 
 
 

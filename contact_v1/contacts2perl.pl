@@ -48,7 +48,7 @@ print "Please enter your selection: [R]Read or [I]Input: ";
 $option = <>;
 chomp ($option);
 
-if ($option eq 'I' || $option eq 'i' || $option eq 'Input' || $option eq 'input')
+if ($option =~ '/I/gi' || $option =~ '/Input/gi')
 	{
 	    print "\n\n";
 	    print color 'bright_cyan';
