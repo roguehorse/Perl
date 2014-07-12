@@ -1,0 +1,23 @@
+How to clean EBLUG profile_value table:
+
+1. Log in to MySQL
+2. Show databases
+3. Use EBLUG
+4. Show tables
+5. Select fid,uid,value from profile_value order by uid into outfile 'eblug_profile_values.txt' fields terminated by ' ' lines terminated by '\n';
+6. File can be found at /var/lib/mysql and requires root permission to retrieve
+7. Move file from /var/lib/mysql to EBLUG and change file permissions to user
+8. Copy file and rename to ebusers.txt
+9. Run file through ebsqlseparate.pl 
+10. Run ebsqlsort.pl and find discrepencies
+11. Remove discrepencies from main dump file
+12. Repeat steps #8 through #10 until no more discrepencies
+13. Run ebsqlFIX.pl to remove unwanted values
+
+
+mysql> select fid,uid,value from profile_value order by uid
+    -> into outfile 'eblug_profile_values_2.txt'
+    -> fields terminated by ' '
+    -> lines terminated by '\n';
+Query OK, 158211 rows affected (0.71 sec)
+
